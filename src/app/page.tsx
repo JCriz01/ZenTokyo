@@ -3,15 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import MobileFooter from './Mobile_footer';
 import Image from 'next/image';
+import Header from './Header';
 
-export default function Home(): React.JSX.Element {
+export default function Home({children} : {
+  children: React.ReactNode,
+}): React.JSX.Element {
+
 
   return (
-    <div className=' relative '>
-      <header>
-      </header>
+    <div className=' relative flex flex-col w-full '>
+      <Header/>
       <main>
-
+        {children}
       </main>
       <MobileFooter />
     </div>
