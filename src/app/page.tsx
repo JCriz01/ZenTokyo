@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import MobileFooter from './Mobile_footer';
+import MobileFooter from './components/Mobile_footer';
 import Image from 'next/image';
-import Header from './Header';
+import Header from './components/Header';
 
 export default function Home({children} : {
   children: React.ReactNode,
