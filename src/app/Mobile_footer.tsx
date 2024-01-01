@@ -7,7 +7,7 @@ const MobileFooterBtn = ({svgSource}: {
 }): React.JSX.Element =>{
 
   return(
-    <button className=' bg-on-tertiary p-3 rounded-full active:translate-y-1 '>
+    <button className=' bg-on-tertiary p-3 rounded-full active:translate-y-1 h-3/4 '>
       <Image width={24} height={24} src={svgSource} alt='' />
     </button>
   )
@@ -52,7 +52,7 @@ export default function MobileFooter(): React.JSX.Element{
 
 
   return(
-    <footer id='mobile-footer' className=' sm:hidden fixed bottom-[4%] left-[32%] right-0 w-[191px] h-[80px] rounded-3xl bg-tertiary flex items-cenater justify-evenly ' >
+    <footer id='mobile-footer' className=' sm:hidden fixed bottom-[4%] left-[32%] right-0 w-[191px] h-[80px] rounded-3xl bg-tertiary flex items-center justify-evenly ' >
       <MobileFooterBtn svgSource='/Home.svg' />
       <MobileFooterBtn svgSource='/ShoppingCart.svg' />
     </footer>

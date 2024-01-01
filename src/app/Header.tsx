@@ -33,12 +33,40 @@ const ToggleMode = (): React.JSX.Element =>{
   )
 }
 
+const MenuItem = ({title, link, last=false}: {
+  title: string,
+  link: string,
+  last: boolean,
+}): React.JSX.Element =>{
+
+  if(last){
+    return(
+      <li className=' border-l-2 border-r-2 h-full px-3 pr-3 pb-[14px] '>
+        <button className='flex'>
+          <a className='hover:bg-tertiary rounded-md' href={link}>{title}</a>
+        </button>
+      </li>
+    )
+  }
+
+  return(
+    <li className=' border-l-2 h-full px-3 pr-3 pb-[14px] '>
+      <button className='flex'>
+        <a className=' hover:bg-tertiary rounded-md' href={link}>{title}</a>
+      </button>
+    </li>
+  )
+}
+
 const Menu = (): React.JSX.Element =>{
 
   return(
-    <div className='sm:none'>
+    <ul className='hidden lg:flex justify-center p-3 pb-0 border-b-2 '>
+      <MenuItem title='Manga' link='/' last={false}/>
+      <MenuItem title='Anime' link='/' last={false}/>
+      <MenuItem title='Merchendise' link='/' last={true}/>
 
-    </div>
+    </ul>
   )
 }
 
@@ -48,27 +76,52 @@ const MobileMenuCard = ({title, link}: {
 }): React.JSX.Element =>{
 
   return(
-    <div className=' w-11/12 border-b-2 '>
-      <a href={link}>{title}</a>
-    </div>
+    <button className=' w-11/12 border-b-2 p-1 text-left  '>
+      <a className=' hover:bg-tertiary block w-full rounded-md p-1 ' href={link}>{title}</a>
+    </button>
   )
 }
 
-const MobileMenu = () =>{
+const MobileMenu = ({state, setState}: {
+  state: boolean,
+  setState: React.Dispatch<React.SetStateAction<boolean>>,
+}) =>{
 
   useEffect(()=>{
+    const parentElem = document.querySelector('body');
+
+    const handleEvent = (Event: Event)=>{
+      
+      const currTarget = Event.target.closest('#mobile-menu');
+      console.log(currTarget);
+
+      if(!currTarget)
+        setState(false);
+      else{
+        console.log('clicked inside');
+      }
+    }
+
     const handleHideMenu = ()=>{
-      const menu = document.getElementById('mobile-menu');
-      if(menu)
-        menu.addEventListener('focusout', ()=>{
-          
-        })
+
+
+      parentElem?.addEventListener('click', handleEvent);
     }
     handleHideMenu();
-  }, [])
+
+    return ()=> parentElem?.removeEventListener('click', handleEvent);
+  },[]);
+
+  const handleCloseMenu = () =>{
+    setState(!state);
+    console.log('Inside moblie menu', state);
+  }
 
   return(
-    <div id='mobile-menu' className='flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg '>
+    <div id='mobile-menu' className='lg:hidden sm:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg '>
+      <div className='flex justify-end w-full'>
+        <button onClick={handleCloseMenu}><Image width={24} height={24} alt='Close mobile menu' src={'/exit.svg'}/></button>
+      </div>
       <MobileMenuCard title='Manga' link='/' />
       <MobileMenuCard title='Figures' link='/' />
       <MobileMenuCard title='Merchindise' link='/' />
@@ -81,15 +134,25 @@ const Header = () =>{
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  useEffect(()=>{
+    console.log('Header component',showMobileMenu);
+  },[showMobileMenu])
+
   const handleMenus = () =>{
-    setShowMobileMenu(!showMobileMenu);
+    if(showMobileMenu){
+      setShowMobileMenu(false);
+    }
+    else{
+      setShowMobileMenu(true);
+    }
+
   }
 
   return(
     <header className="flex flex-col">
 
       <div className=' flex justify-between'>
-        <button onClick={()=>handleMenus()}>
+        <button onClick={handleMenus} className='lg:hidden'>
           <Image width={24} height={24} src={'/hamburger-lg.svg'} alt='' />
         </button>
 
@@ -97,7 +160,7 @@ const Header = () =>{
         <ToggleMode />
       </div>
 
-      {showMobileMenu ? <MobileMenu /> : null}
+      {showMobileMenu ? <MobileMenu state={showMobileMenu} setState={setShowMobileMenu}/> : null}
       <Menu/>
     </header>
   )
