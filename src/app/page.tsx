@@ -11,12 +11,8 @@ export default function Home({children} : {
 
 
   return (
-    <div className=' relative flex flex-col w-full '>
-      <Header/>
-      <main>
-        {children}
-      </main>
-      <MobileFooter />
-    </div>
+    <main>
+      testing
+    </main>
   )
 }

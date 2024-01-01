@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
@@ -52,9 +54,9 @@ export default function MobileFooter(): React.JSX.Element{
 
 
   return(
-    <footer id='mobile-footer' className=' sm:hidden fixed bottom-[4%] left-[32%] right-0 w-[191px] h-[80px] rounded-3xl bg-tertiary flex items-center justify-evenly ' >
+    <div id='mobile-footer' className=' sm:hidden fixed bottom-[4%] left-[32%] right-0 w-[191px] h-[80px] rounded-3xl bg-tertiary flex items-center justify-evenly ' >
       <MobileFooterBtn svgSource='/Home.svg' />
       <MobileFooterBtn svgSource='/ShoppingCart.svg' />
-    </footer>
+    </div>
   )
 }

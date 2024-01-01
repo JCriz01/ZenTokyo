@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ToggleMode = (): React.JSX.Element =>{
 
@@ -43,7 +46,7 @@ const MenuItem = ({title, link, last=false}: {
     return(
       <li className=' border-l-2 border-r-2 h-full px-3 pr-3 pb-[14px] '>
         <button className='flex'>
-          <a className='hover:bg-tertiary rounded-md' href={link}>{title}</a>
+          <Link className='hover:bg-tertiary rounded-md' href={link}>{title}</Link>
         </button>
       </li>
     )
@@ -52,7 +55,7 @@ const MenuItem = ({title, link, last=false}: {
   return(
     <li className=' border-l-2 h-full px-3 pr-3 pb-[14px] '>
       <button className='flex'>
-        <a className=' hover:bg-tertiary rounded-md' href={link}>{title}</a>
+        <Link className=' hover:bg-tertiary rounded-md' href={link}>{title}</Link>
       </button>
     </li>
   )
@@ -62,8 +65,8 @@ const Menu = (): React.JSX.Element =>{
 
   return(
     <ul className='hidden lg:flex justify-center p-3 pb-0 border-b-2 '>
-      <MenuItem title='Manga' link='/' last={false}/>
-      <MenuItem title='Anime' link='/' last={false}/>
+      <MenuItem title='Manga' link='/manga' last={false}/>
+      <MenuItem title='Anime' link='/anime' last={false}/>
       <MenuItem title='Merchendise' link='/' last={true}/>
 
     </ul>
@@ -77,7 +80,7 @@ const MobileMenuCard = ({title, link}: {
 
   return(
     <button className=' w-11/12 border-b-2 p-1 text-left  '>
-      <a className=' hover:bg-tertiary block w-full rounded-md p-1 ' href={link}>{title}</a>
+      <Link className=' hover:bg-tertiary block w-full rounded-md p-1 ' href={link}>{title}</Link>
     </button>
   )
 }
@@ -118,7 +121,7 @@ const MobileMenu = ({state, setState}: {
   }
 
   return(
-    <div id='mobile-menu' className='lg:hidden sm:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg '>
+    <div id='mobile-menu' className=' absolute top-[60px] lg:hidden sm:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg '>
       <div className='flex justify-end w-full'>
         <button onClick={handleCloseMenu}><Image width={24} height={24} alt='Close mobile menu' src={'/exit.svg'}/></button>
       </div>
@@ -149,7 +152,7 @@ const Header = () =>{
   }
 
   return(
-    <header className="flex flex-col">
+    <header className=" relative flex flex-col w-full">
 
       <div className=' flex justify-between'>
         <button onClick={handleMenus} className='lg:hidden'>
