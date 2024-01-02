@@ -1,18 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import MobileFooter from './components/Mobile_footer';
-import Image from 'next/image';
-import Header from './components/Header';
+import React, { useState, useEffect } from "react";
+import MobileFooter from "./components/Mobile_footer";
+import Image from "next/image";
+import Header from "./components/Header";
 
-export default function Home({children} : {
-  children: React.ReactNode,
+export default function Home({
+  children,
+}: {
+  children: React.ReactNode;
 }): React.JSX.Element {
-
-
-  return (
-    <main>
-      testing
-    </main>
-  )
+  return <main className=" flex-grow w-full ">testing</main>;
 }
