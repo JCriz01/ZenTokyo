@@ -19,11 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className=" h-full">
-      <body className=" relative flex flex-col items-center px-4 lg:px-16 min-h-full justify-between ">
+      <body className=" bg-neutral-50 relative flex flex-col items-center min-h-full justify-between  ">
         <Header />
-
         {children}
-        <MobileFooter />
         <Footer />
       </body>
     </html>

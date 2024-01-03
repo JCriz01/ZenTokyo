@@ -114,7 +114,7 @@ const MobileMenu = ({
     const parentElem = document.querySelector("body");
 
     const handleEvent = (Event: Event) => {
-      const currTarget = Event.target.closest("#mobile-menu");
+      const currTarget = Event.target?.closest("#mobile-menu");
       console.log(currTarget);
 
       if (!currTarget) setState(false);
@@ -139,7 +139,7 @@ const MobileMenu = ({
   return (
     <div
       id="mobile-menu"
-      className=" absolute top-[60px] lg:hidden sm:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg "
+      className=" absolute top-[60px] lg:hidden sm:w-1/2 md:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg "
     >
       <div className="flex justify-end w-full">
         <button onClick={handleCloseMenu}>
@@ -175,7 +175,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" relative flex flex-col w-full flex-grow-0 ">
+    <header className=" p-4 lg:px-14 relative flex flex-col w-full flex-grow-0 ">
       <div className=" flex justify-between">
         <button onClick={handleMenus} className="lg:hidden">
           <Image width={24} height={24} src={"/hamburger-lg.svg"} alt="" />

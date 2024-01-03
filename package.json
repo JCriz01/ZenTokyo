@@ -11,6 +11,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@shopify/shopify-api": "^8.1.1",
+    "graphql-request": "^6.1.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"

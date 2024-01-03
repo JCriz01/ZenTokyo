@@ -1,14 +1,27 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import MobileFooter from "./components/Mobile_footer";
 import Image from "next/image";
-import Header from "./components/Header";
+import RootCard from "@/app/components/RootCard";
 
-export default function Home({
-  children,
-}: {
-  children: React.ReactNode;
-}): React.JSX.Element {
-  return <main className=" flex-grow w-full ">testing</main>;
+export default function Home(): React.JSX.Element {
+  return (
+    <main className=" px-4 lg:px-14 h-full  w-full flex p-2 ">
+      <RootCard
+        img={"/csm_vol1_cover 2.png"}
+        title={"Chainsaw Man Vol 1"}
+        price={11}
+      />
+      <RootCard
+        img={"/csm_vol1_cover 2.png"}
+        title={"Chainsaw Man Vol 1"}
+        price={11}
+      />
+      <RootCard
+        img={"/csm_vol1_cover 2.png"}
+        title={"Chainsaw Man Vol 1"}
+        price={11}
+      />
+    </main>
+  );
 }
