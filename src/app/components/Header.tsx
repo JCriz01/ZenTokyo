@@ -94,7 +94,7 @@ const MobileMenuCard = ({
   return (
     <button className=" w-11/12 border-b-2 p-1 text-left  ">
       <Link
-        className=" hover:bg-tertiary block w-full rounded-md p-1 "
+        className=" hover:bg-tertiary active:bg-rose-300 block w-full rounded-md p-1 "
         href={link}
       >
         {title}
@@ -139,7 +139,7 @@ const MobileMenu = ({
   return (
     <div
       id="mobile-menu"
-      className=" absolute top-[60px] lg:hidden sm:w-1/2 md:w-1/3 flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg "
+      className=" bg-white z-[20] absolute top-[60px] left-0 w-1/2 sm:w-1/2 md:w-1/3 lg:hidden flex flex-col items-center p-1 border-gray-700 border-2 rounded-md shadow-lg "
     >
       <div className="flex justify-end w-full">
         <button onClick={handleCloseMenu}>
@@ -151,10 +151,10 @@ const MobileMenu = ({
           />
         </button>
       </div>
-      <MobileMenuCard title="Manga" link="/" />
-      <MobileMenuCard title="Anime" link="/" />
-      <MobileMenuCard title="Games" link="/" />
-      <MobileMenuCard title="Merchindise" link="/" />
+      <MobileMenuCard title="Manga" link="/manga" />
+      <MobileMenuCard title="Anime" link="/anime" />
+      <MobileMenuCard title="Games" link="/games" />
+      <MobileMenuCard title="Apperal" link="/apperal" />
     </div>
   );
 };
@@ -175,7 +175,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" p-4 lg:px-14 relative flex flex-col w-full flex-grow-0 ">
+    <header className=" z-50 sticky top-0 text-black bg-white  p-4 lg:px-14  flex flex-col w-full flex-grow-0 ">
       <div className=" flex justify-between">
         <button onClick={handleMenus} className="lg:hidden">
           <Image width={24} height={24} src={"/hamburger-lg.svg"} alt="" />

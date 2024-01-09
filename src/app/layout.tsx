@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className=" h-full">
-      <body className=" bg-neutral-50 relative flex flex-col items-center min-h-full justify-between  ">
+      <body className=" relative bg-neutral-100 flex flex-col items-center min-h-full   ">
         <Header />
         {children}
         <Footer />

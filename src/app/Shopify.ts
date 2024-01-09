@@ -1,15 +1,12 @@
-import { config } from "dotenv";
+require("dotenv").config();
 import { gql, GraphQLClient } from "graphql-request";
 import * as shopify from "@shopify/shopify-api";
 
-config();
-
 //loading access token
-const storefrontAccessToken: string = "136e47545a6ace9cda3507b6249d4186";
+const storefrontAccessToken: string | undefined = process.env.NEXT_PUBLIC_TOKEN;
 
 //loading shop name
-const endpoint: string =
-  "https://devstoretesting2345.myshopify.com/api/2024-01/graphql.json";
+const endpoint: string | undefined = process.env.NEXT_PUBLIC_ENDPOINT;
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
@@ -32,10 +29,28 @@ interface image {
   };
 }
 
+export interface productNode {
+  node: {
+    title: string;
+    handle: string;
+    images: image[];
+    variants: {
+      edges: {
+        node: {
+          price: {
+            amount: string;
+            currencyCode: string;
+          };
+        };
+      };
+    };
+  };
+}
+
 export interface TrendingCollection {
   collectionByHandle: {
     products: {
-      edges: node[];
+      edges: productNode[];
     };
   };
 }

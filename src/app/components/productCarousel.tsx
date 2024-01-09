@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { node } from "../Shopify";
+import { productNode } from "../Shopify";
 import trimTitle from "@/utils/trimTitle";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 
 import "@splidejs/react-splide/css/sea-green";
 
-const ProductSlider = ({ elementArray }: { elementArray: node[] }) => {
+const ProductSlider = ({ elementArray }: { elementArray: productNode[] }) => {
   if (elementArray) {
     elementArray = elementArray.map((product) => {
       if (product.node.title)
@@ -16,6 +16,15 @@ const ProductSlider = ({ elementArray }: { elementArray: node[] }) => {
       return product;
     });
   }
+
+  useEffect(() => {
+    const sliderContainer = document.getElementById("slider-container");
+
+    if (sliderContainer) {
+      sliderContainer.style.paddingTop = "30px";
+      sliderContainer.style.zIndex = "1";
+    }
+  });
 
   console.log("Element Array: ", elementArray);
 
@@ -33,26 +42,27 @@ const ProductSlider = ({ elementArray }: { elementArray: node[] }) => {
           640: {
             perPage: 2,
           },
-          768: {
+          815: {
             perPage: 3,
           },
-          1040: {
+          1225: {
             perPage: 4,
           },
         },
       }}
-      className={" w-full md:w-4/5 2xl:w-3/5 "}
+      className={" w-full md:w-4/5 2xl:w-3/5 z-[1] "}
+      id={"slider-container"}
     >
       {elementArray.map((product, index) => {
         return (
           <SplideSlide
             key={index}
-            className={"flex items-center justify-center "}
+            className={"flex items-center justify-center z-[1] "}
           >
             <div
               key={index}
               className={
-                "self-center flex flex-col items-center justify-center"
+                "self-center flex flex-col items-center justify-center z-[1]"
               }
             >
               <Image

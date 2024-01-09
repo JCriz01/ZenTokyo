@@ -1,5 +1,5 @@
-export default function trimTitle(title: string) {
-  const maxLength = 20;
+export default function trimTitle(title: string): string {
+  const maxLength = 12;
   console.log(title);
 
   if (title && title.length > maxLength) {
