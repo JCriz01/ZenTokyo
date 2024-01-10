@@ -76,10 +76,10 @@ const MenuItem = ({
 const Menu = (): React.JSX.Element => {
   return (
     <ul className="hidden lg:flex justify-center p-3 pb-0 border-b-2 ">
-      <MenuItem title="Manga" link="/" last={false} />
-      <MenuItem title="Anime" link="/" last={false} />
-      <MenuItem title="Games" link="/" last={false} />
-      <MenuItem title="Merchendise" link="/" last={true} />
+      <MenuItem title="Manga" link="/manga" last={false} />
+      <MenuItem title="Anime" link="/anime" last={false} />
+      <MenuItem title="Games" link="/games" last={false} />
+      <MenuItem title="Merchendise" link="/apparel" last={true} />
     </ul>
   );
 };
@@ -155,6 +155,7 @@ const MobileMenu = ({
       <MobileMenuCard title="Anime" link="/anime" />
       <MobileMenuCard title="Games" link="/games" />
       <MobileMenuCard title="Apperal" link="/apperal" />
+      <MobileMenuCard title="Figures" link="/figures" />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 require("dotenv").config();
 import { gql, GraphQLClient } from "graphql-request";
 import * as shopify from "@shopify/shopify-api";
+import { TrendingCollection } from "../types/TrendingCollection";
 
 //loading access token
 const storefrontAccessToken: string | undefined = process.env.NEXT_PUBLIC_TOKEN;
@@ -15,46 +16,6 @@ const graphQLClient = new GraphQLClient(endpoint, {
   },
 });
 
-export interface node {
-  title: string;
-  handle: string;
-  images: image[];
-}
-
-interface image {
-  edges: {
-    node: {
-      originalSrc: string;
-    };
-  };
-}
-
-export interface productNode {
-  node: {
-    title: string;
-    handle: string;
-    images: image[];
-    variants: {
-      edges: {
-        node: {
-          price: {
-            amount: string;
-            currencyCode: string;
-          };
-        };
-      };
-    };
-  };
-}
-
-export interface TrendingCollection {
-  collectionByHandle: {
-    products: {
-      edges: productNode[];
-    };
-  };
-}
-
 export async function getTrendingCollection(): Promise<
   TrendingCollection | undefined
 > {
@@ -66,6 +27,7 @@ export async function getTrendingCollection(): Promise<
             node {
               title
               handle
+              productType
               images(first: 2) {
                 edges {
                   node {
@@ -92,6 +54,44 @@ export async function getTrendingCollection(): Promise<
 
   try {
     return await graphQLClient.request(getTrendingCollectionItems);
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function getProductsByType(productType: string) {
+  const getProductsByType = gql`
+    query{
+      products(first: 20 ,query: "product_type:${productType}"){
+        edges {
+          node {
+            title
+            productType
+            variants(first: 1){
+              edges {
+                node{
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+            images(first: 2){
+              edges {
+                node{
+                  originalSrc
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    return await graphQLClient.request(getProductsByType);
   } catch (error) {
     throw new Error(error as string);
   }

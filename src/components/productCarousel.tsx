@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { productNode } from "../Shopify";
+import { productNode } from "@/types/TrendingCollection";
 import trimTitle from "@/utils/trimTitle";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 

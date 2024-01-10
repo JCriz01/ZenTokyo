@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { getTrendingCollection } from "@/app/Shopify";
 import { useEffect } from "react";
-import { TrendingCollection } from "@/app/Shopify";
+import { TrendingCollection } from "@/types/TrendingCollection";
 import ProductSlider from "./productCarousel";
 
 const TrendingCarousel = () => {
