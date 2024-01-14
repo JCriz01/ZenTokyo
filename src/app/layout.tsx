@@ -18,12 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className=" h-full">
+    <html lang="en" className=" h-screen">
       <body className=" relative bg-neutral-100 flex flex-col items-center min-h-full   ">
         <Header />
-        <main className="  flex-grow px-4 lg:px-14 xl:px-24 h-full  w-full flex flex-col justify-center p-2 ">
-          {children}
-        </main>
+        {children}
         <Footer />
       </body>
     </html>

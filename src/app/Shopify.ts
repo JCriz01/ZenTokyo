@@ -66,6 +66,7 @@ export async function getProductsByType(productType: string) {
         edges {
           node {
             title
+            handle
             productType
             variants(first: 1){
               edges {
@@ -92,6 +93,42 @@ export async function getProductsByType(productType: string) {
 
   try {
     return await graphQLClient.request(getProductsByType);
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function getProductByHandle(handle: string) {
+  const getProductByHandle = gql`
+    query{
+      productByHandle(handle: "${handle}"){    
+        title
+        handle
+        productType
+        description
+        images(first: 2){
+          edges {
+            node{
+              originalSrc
+            }
+          }
+        }
+        variants(first: 1){
+          edges {
+            node{
+              priceV2 {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    return await graphQLClient.request(getProductByHandle);
   } catch (error) {
     throw new Error(error as string);
   }

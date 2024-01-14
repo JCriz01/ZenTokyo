@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { productNode } from "@/types/TrendingCollection";
 import { Suspense } from "react";
 import { LoadingProducts } from "@/components/LoadingSkeleton";
+import Link from "next/link";
 
 const isValidCategory = (params) => {
   const validCategory = [
@@ -34,7 +35,7 @@ const PageHeader = ({
   // Modify the PageHeader component to accept an object with a title property
   const router = useRouter();
   return (
-    <div className="flex flex-col justify-between sm:flex-row">
+    <div className=" p-2 flex flex-col justify-between sm:flex-row">
       <div className="flex-col flex sm:flex-row p-2 w-1/3 justify-between">
         <button className="flex" onClick={() => router.back()}>
           <Image
@@ -61,21 +62,46 @@ const PageHeader = ({
   );
 };
 
-const Products = ({ productsArray }: { productsArray: productNode[] }) => {
+const Products = ({
+  productsArray,
+  category,
+}: {
+  productsArray: productNode[];
+  category: string;
+}) => {
+  const router = useRouter();
   console.log(productsArray);
+
+  const handleCardClick = (product: string) => {
+    router.push(`/${category}/${product}`);
+  };
 
   //if (!productsArray) return <LoadingProducts />;
   return (
-    <div className="flex flex-wrap gap-2 items-center">
+    <div className="flex flex-wrap gap-4 items-center justify-center">
       {productsArray.map((product, index: number) => {
         return (
-          <div key={index} className="flex flex-col items-center">
+          <div
+            key={index}
+            className=" max-w-52 p-3  flex flex-col items-center"
+            onClick={() => handleCardClick(product.node.handle)}
+          >
             <Image
               src={product.node.images.edges[0].node.originalSrc}
               alt="product"
               width={200}
               height={300}
+              className="flex"
             />
+            <div className=" p-2 flex flex-col text-wrap">
+              <p>{product.node.title}</p>
+              <p className="mt-12 text-center text-wrap">
+                ${product.node.variants.edges[0].node.priceV2.amount}
+              </p>
+            </div>
+            <button className=" p-2 bg-rose-400 rounded-lg hover:bg-black hover:text-white">
+              Add to cart
+            </button>
           </div>
         );
       })}
@@ -88,7 +114,7 @@ const Page = ({ params }: { params: { category: string } }) => {
   const [hideFilter, setHideFilter] = useState(false);
   const router = useRouter();
 
-  console.log(products);
+  //console.log(products);
 
   if (!isValidCategory(params)) {
     notFound();
@@ -100,7 +126,7 @@ const Page = ({ params }: { params: { category: string } }) => {
     const fetchProducts = async () => {
       try {
         const productRes = await getProductsByType(params.category);
-        console.log("Products: ", products);
+        console.log("Products from fetch: ", products);
 
         setProducts(productRes.products.edges);
       } catch (error) {
@@ -111,18 +137,18 @@ const Page = ({ params }: { params: { category: string } }) => {
   }, []);
 
   return (
-    <>
+    <main className=" flex-grow  px-4 lg:px-14 xl:px-24 h-full  w-full flex flex-col justify-start p-2 ">
       <PageHeader
         title={params.category}
         state={hideFilter}
         setState={setHideFilter}
       />
       {products && products.length > 0 ? (
-        <Products productsArray={products} />
+        <Products category={params.category} productsArray={products} />
       ) : (
-        <LoadingProducts />
+        <LoadingProducts /> || <p>No products found</p>
       )}
-    </>
+    </main>
   );
 };
 
