@@ -37,7 +37,7 @@ const PageHeader = ({
   return (
     <div className=" p-2 flex flex-col justify-between sm:flex-row">
       <div className="flex-col flex sm:flex-row p-2 w-1/3 justify-between">
-        <button className="flex" onClick={() => router.back()}>
+        <button className="flex" onClick={() => router.push("/")}>
           <Image
             src={"/backArrow.svg"}
             height={24}

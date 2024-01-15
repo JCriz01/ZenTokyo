@@ -16,6 +16,19 @@
   }
 }
 
-body {
+.splide__slide {
+  background: #eee;
+}
 
+.splide__slide img {
+  width: 100%;
+  height: auto;
+}
+
+.wrapper {
+  margin: 4rem auto;
+}
+
+.splide--val {
+  margin-top: 1rem;
 }

@@ -5,7 +5,7 @@ export interface node {
   handle: string;
   images: image[];
 }
-interface image {
+export interface image {
   edges: {
     node: {
       originalSrc: string;
