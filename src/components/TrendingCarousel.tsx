@@ -9,15 +9,22 @@ import ProductSlider from "./productCarousel";
 const TrendingCarousel = () => {
   let [trendingItems, setTrendingItems] = useState<TrendingCollection>();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     const fetchTrendingCollection = async () => {
-      const trendingCollection = await getTrendingCollection();
-      console.log("Trending Collection: ", trendingCollection);
+      setLoading(true);
+      try{
+        const trendingCollection = await getTrendingCollection();
+        console.log("Trending Collection: ", trendingCollection);
 
-      setTrendingItems(trendingCollection);
-      setLoading(false);
+        setTrendingItems(trendingCollection);
+        setLoading(false);
+        setError(false);
+      } catch (error){
+        setError(true);
+        setLoading(false);
+      }
     };
     fetchTrendingCollection();
   }, []);
@@ -25,6 +32,12 @@ const TrendingCarousel = () => {
   const trendingItemsArray = trendingItems?.collectionByHandle.products.edges;
 
   console.log("Trending Items Array: ", trendingItemsArray);
+
+  if (error) {
+    return null;
+  }
+
+
   return (
     <div className="flex flex-col items-center pt-10 pb-10 w-full ">
       <h1 className=" border-b-2 border-black w-4/5 ">
@@ -37,6 +50,7 @@ const TrendingCarousel = () => {
       ) : (
         <ProductSlider elementArray={trendingItemsArray || []} />
       )}
+
     </div>
   );
 };

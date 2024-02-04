@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Options } from "@splidejs/splide";
 import { image } from "@/types/TrendingCollection";
-import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css";
 import Image from "next/image";
 
 const ItemCarousel = ({ productItem }: { productItem: image[] }) => {
@@ -25,50 +25,53 @@ const ItemCarousel = ({ productItem }: { productItem: image[] }) => {
     return productItem.map((slide, index) => {
       return (
         <SplideSlide key={index}>
-          <Image
+          <img
             src={productItem[index].node.originalSrc}
             width={200}
             height={300}
             alt="product"
-          />
+          ></img>
         </SplideSlide>
       );
     });
   };
 
   const mainOptions: Options = {
-    perPage: 2,
-    perMove: 1,
-    gap: "1rem",
-    pagination: false,
-    height: "10rem",
-    wheel: true,
+
+    mediaQuery: "min",
+    breakpoints: {
+
+      1250: {
+        width: 465,
+      }
+    },
+    width: 250,
+    rewind: true,
+    
   };
 
   const thumbsOptions: Options = {
-    type: "slide",
-    rewind: true,
-    gap: 10,
+    
     pagination: false,
-    fixedWidth: 100,
-    fixedHeight: 100,
-
-    cover: true,
-    focus: "center",
-    isNavigation: true,
+    height: 320,
     direction: "ttb",
+    isNavigation: true,
+    focus: "center",
+    fixedHeight: 160,
+    gap: 5,
   };
 
   console.log(mainOptions);
 
   return (
-    <div id="wrapper" className="flex justify-evenly">
-      <Splide options={{ mainOptions }} ref={mainRef}>
+    <div id="wrapper" className="flex justify-evenly gap-4 items-start ">
+      <Splide options={ thumbsOptions } ref={thumbnailRef} className=" hidden lg:block ">
         {renderSlides()}
       </Splide>
-      <Splide options={{ thumbsOptions }} ref={thumbnailRef}>
+      <Splide options={ mainOptions } ref={mainRef}>
         {renderSlides()}
       </Splide>
+
     </div>
   );
 };

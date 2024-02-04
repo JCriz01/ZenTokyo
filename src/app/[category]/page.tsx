@@ -112,6 +112,8 @@ const Products = ({
 const Page = ({ params }: { params: { category: string } }) => {
   const [products, setProducts] = useState<productNode[]>();
   const [hideFilter, setHideFilter] = useState(false);
+  const [error, setError] = useState(false);
+
   const router = useRouter();
 
   //console.log(products);
@@ -129,12 +131,21 @@ const Page = ({ params }: { params: { category: string } }) => {
         console.log("Products from fetch: ", products);
 
         setProducts(productRes.products.edges);
+        setError(false);
       } catch (error) {
-        console.error(error);
+        setError(true);
       }
     };
     fetchProducts();
   }, []);
+
+  if (error){
+    return(
+      <div className="self-center flex items-center justify-center">
+        <p>Unable to fetch items.</p>
+      </div>
+    )
+  }
 
   return (
     <main className=" flex-grow  px-4 lg:px-14 xl:px-24 h-full  w-full flex flex-col justify-start p-2 ">

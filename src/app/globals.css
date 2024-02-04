@@ -16,19 +16,37 @@
   }
 }
 
+label {
+  margin-right: 1rem;
+}
+
+input {
+  font-family: inherit;
+  height: 1.5rem;
+  width: 4rem;
+  margin-right: 3px;
+}
+
+label span {
+  margin-right: 4px;
+}
+
+
+#wrapper {
+  max-width: 600px;
+  margin: 50px;
+}
+
 .splide__slide {
   background: #eee;
 }
 
 .splide__slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
-.wrapper {
-  margin: 4rem auto;
-}
-
-.splide--val {
+.splide--nav {
   margin-top: 1rem;
 }

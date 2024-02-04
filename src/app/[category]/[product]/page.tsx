@@ -13,6 +13,7 @@ const ProductDisplay = () => {
 
 const Page = ({ params }: { params: { product: string } }) => {
   const [product, setProduct] = useState(undefined);
+  const [error, setError] = useState(false);
 
   console.log(product);
 
@@ -23,8 +24,10 @@ const Page = ({ params }: { params: { product: string } }) => {
 
         if (res) setProduct(res.productByHandle);
         else setProduct(null);
+
+        setError(false);
       } catch (err) {
-        console.log(err);
+        setError(true);
       }
     };
     fetchProductByHandle();
@@ -39,11 +42,17 @@ const Page = ({ params }: { params: { product: string } }) => {
 
   if (product === undefined) return <p>Loading...</p>;
 
+  if (error) return <p>Unable to fetch product</p>;
+
   return (
-    <main className=" flex flex-col flex-grow w-full">
+    <main className="flex flex-col md:flex-row flex-grow w-full">
       {product === null && <p>Product not found</p>}
       {imageArray && <ItemCarousel productItem={imageArray} />}
-      <div></div>
+      <div className=" flex flex-col">
+        <h1>{product.title}</h1>
+        <p>{product.description}</p>
+        <p>${product.variants.edges[0].node.priceV2.amount}</p>
+      </div>
     </main>
   );
 };
