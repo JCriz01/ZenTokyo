@@ -37,21 +37,17 @@ const ItemCarousel = ({ productItem }: { productItem: image[] }) => {
   };
 
   const mainOptions: Options = {
-
     mediaQuery: "min",
     breakpoints: {
-
       1250: {
         width: 465,
-      }
+      },
     },
     width: 250,
     rewind: true,
-    
   };
 
   const thumbsOptions: Options = {
-    
     pagination: false,
     height: 320,
     direction: "ttb",
@@ -65,13 +61,16 @@ const ItemCarousel = ({ productItem }: { productItem: image[] }) => {
 
   return (
     <div id="wrapper" className="flex justify-evenly gap-4 items-start ">
-      <Splide options={ thumbsOptions } ref={thumbnailRef} className=" hidden lg:block ">
+      <Splide
+        options={thumbsOptions}
+        ref={thumbnailRef}
+        className=" hidden lg:block "
+      >
         {renderSlides()}
       </Splide>
-      <Splide options={ mainOptions } ref={mainRef}>
+      <Splide options={mainOptions} ref={mainRef}>
         {renderSlides()}
       </Splide>
-
     </div>
   );
 };

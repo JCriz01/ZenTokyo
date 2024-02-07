@@ -14,14 +14,14 @@ const TrendingCarousel = () => {
   useEffect(() => {
     const fetchTrendingCollection = async () => {
       setLoading(true);
-      try{
+      try {
         const trendingCollection = await getTrendingCollection();
         console.log("Trending Collection: ", trendingCollection);
 
         setTrendingItems(trendingCollection);
         setLoading(false);
         setError(false);
-      } catch (error){
+      } catch (error) {
         setError(true);
         setLoading(false);
       }
@@ -37,7 +37,6 @@ const TrendingCarousel = () => {
     return null;
   }
 
-
   return (
     <div className="flex flex-col items-center pt-10 pb-10 w-full ">
       <h1 className=" border-b-2 border-black w-4/5 ">
@@ -50,7 +49,6 @@ const TrendingCarousel = () => {
       ) : (
         <ProductSlider elementArray={trendingItemsArray || []} />
       )}
-
     </div>
   );
 };
