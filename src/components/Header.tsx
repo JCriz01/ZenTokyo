@@ -176,16 +176,19 @@ const Header = () => {
   };
 
   return (
-    <header className=" z-50 sticky top-0 text-black bg-white  p-4 lg:px-14  flex flex-col w-full flex-grow-0 ">
-      <div className=" flex justify-between">
-        <button onClick={handleMenus} className="lg:hidden">
-          <Image width={24} height={24} src={"/hamburger-lg.svg"} alt="" />
-        </button>
+    <header className="  z-50 sticky top-0 text-black bg-white  p-4 lg:px-14  flex flex-col w-full flex-grow-0  ">
+      <div className="  flex items-center justify-center ">
+        <div className=" max-w-[1800px] flex justify-between w-full ">
+          <button onClick={handleMenus} className="lg:hidden">
+            <Image width={24} height={24} src={"/hamburger-lg.svg"} alt="" />
+          </button>
 
-        <h1 className=" text-3xl p-3 font-bold ">
-          <Link href={"/"}>ZenTokyo</Link>
-        </h1>
-        <ToggleMode />
+          <h1 className=" text-3xl p-3 font-bold ">
+            <Link href={"/"}>ZenTokyo</Link>
+          </h1>
+
+          <ToggleMode />
+        </div>
       </div>
 
       {showMobileMenu ? (

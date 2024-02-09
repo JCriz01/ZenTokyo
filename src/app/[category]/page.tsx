@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { productNode } from "@/types/TrendingCollection";
 import { Suspense } from "react";
 import { LoadingProducts } from "@/components/LoadingSkeleton";
+import trimTitle from "@/utils/trimTitle";
 import Link from "next/link";
 
 const isValidCategory = (params) => {
@@ -94,7 +95,7 @@ const Products = ({
               className="flex"
             />
             <div className=" p-2 flex flex-col text-wrap">
-              <p>{product.node.title}</p>
+              <p>{trimTitle(product.node.title, 18)}</p>
               <p className="mt-12 text-center text-wrap">
                 ${product.node.variants.edges[0].node.priceV2.amount}
               </p>
@@ -139,12 +140,12 @@ const Page = ({ params }: { params: { category: string } }) => {
     fetchProducts();
   }, []);
 
-  if (error){
-    return(
+  if (error) {
+    return (
       <div className="self-center flex items-center justify-center">
         <p>Unable to fetch items.</p>
       </div>
-    )
+    );
   }
 
   return (

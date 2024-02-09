@@ -50,7 +50,7 @@ const ProductSlider = ({ elementArray }: { elementArray: productNode[] }) => {
           },
         },
       }}
-      className={" w-full md:w-4/5 2xl:w-3/5 z-[1] "}
+      className={" w-full 2xl:w-4/5 z-[1] "}
       id={"slider-container"}
     >
       {elementArray.map((product, index) => {
