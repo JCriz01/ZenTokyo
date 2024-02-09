@@ -79,12 +79,12 @@ const Products = ({
 
   //if (!productsArray) return <LoadingProducts />;
   return (
-    <div className="flex flex-wrap gap-4 items-center justify-center">
+    <div className=" max-w-6xl grid grid-cols-2 md:grid-cols-3 justify-items-center self-center flex-wrap ">
       {productsArray.map((product, index: number) => {
         return (
           <div
             key={index}
-            className=" max-w-52 p-3  flex flex-col items-center"
+            className=" p-3  flex flex-col items-center "
             onClick={() => handleCardClick(product.node.handle)}
           >
             <Image
@@ -94,9 +94,15 @@ const Products = ({
               height={300}
               className="flex"
             />
+<<<<<<< HEAD
             <div className=" p-2 flex flex-col text-wrap">
               <p>{trimTitle(product.node.title, 18)}</p>
               <p className="mt-12 text-center text-wrap">
+=======
+            <div className=" p-2 flex flex-col ">
+              <p>{product.node.title}</p>
+              <p className="mt-12 text-center ">
+>>>>>>> 57e7fec3f729d451f4fc282eac74729b8b6c1400
                 ${product.node.variants.edges[0].node.priceV2.amount}
               </p>
             </div>

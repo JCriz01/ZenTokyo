@@ -48,11 +48,27 @@ const Page = ({ params }: { params: { product: string } }) => {
     <main className="flex flex-col md:flex-row flex-grow w-full">
       {product === null && <p>Product not found</p>}
       {imageArray && <ItemCarousel productItem={imageArray} />}
-      <div className=" flex flex-col">
-        <h1>{product.title}</h1>
-        <p>{product.description}</p>
-        <p>${product.variants.edges[0].node.priceV2.amount}</p>
-      </div>
+      <section className=" flex flex-col">
+        <div>
+          <h1>{product.title}</h1>
+          <p>{product.description}</p>
+          <p>${product.variants.edges[0].node.priceV2.amount}</p>
+          <p>Availability: </p>
+        </div>
+
+        <div>
+          <button>Add to Cart</button>
+          <button>Add to Wishlist</button>
+        </div>
+
+        <div className="flex flex-col">
+          <div>
+            <p>Description</p>
+            <button>placeholder</button>
+          </div>
+          <div>{product.description}</div>
+        </div>
+      </section>
     </main>
   );
 };
